@@ -8,14 +8,19 @@ This code open for learning best practice for clean code architecture by isung t
 state managemnt packge
 
 https://pub.dev/packages/flutter_bloc
+
 ## get_it
+
 plugin for eacsy implememnt DI(dependency injection)
 
 note its not pure DI this is service locator that in the background working diff from di but same result :)
 
 https://pub.dev/packages/get_it
+
 ## retrofit
+
 plugin for http request this is wrapper for dio plugin
+
 https://pub.dev/packages/retrofit
 
 ## Run project
