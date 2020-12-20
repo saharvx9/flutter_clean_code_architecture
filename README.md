@@ -11,7 +11,7 @@ https://pub.dev/packages/flutter_bloc
 
 ## get_it
 
-plugin for eacsy implememnt DI(dependency injection)
+plugin for easy implememnt DI(dependency injection)
 
 note its not pure DI this is service locator that in the background working diff from di but same result :)
 
@@ -39,9 +39,9 @@ For run this project we need to do some things:
 
 ## **Notice
 
-if you want to run it on a areal device you need to change some properties:
+if you want to run it on a real device you need to change some properties:
 
-1. go to ypur network setting in your pc and checkout whats your ip of your network/wifi then copy it
+1. go to your network setting in your pc and checkout whats your ip of your network/wifi then copy it
 
 2. go to ```api_configuration.dart``` in your flutter project and change this value :
 
