@@ -87,7 +87,6 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
-
 # Coverage
 coverage/
 
