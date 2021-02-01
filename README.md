@@ -23,6 +23,12 @@ plugin for http request this is wrapper for dio plugin
 
 https://pub.dev/packages/retrofit
 
+## Floor - sqlite DB
+
+plugin for create local db 
+
+https://pub.dev/packages/floor
+
 ## Run project
 
 For run this project we need to do some things:
