@@ -22,7 +22,9 @@ class HomeBloc extends Bloc<BaseHomeEvent,BaseHomeState> {
         break;
       case GetUsersListEvent:
         yield LoadingState();
-        yield* _usersRepository.loadUsers().asStream().map((users) => UsersListResult(users));
+        // Choose which saving type are you want DB/CACHE
+        // yield* _usersReposit ory.loadUsersCache().asStream().map((users) => UsersListResult(users));
+        yield* _usersRepository.loadUsersDb().asStream().map((users) => UsersListResult(users));
         break;
       default:
         yield InitialState();

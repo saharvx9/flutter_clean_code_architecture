@@ -1,9 +1,13 @@
 import 'package:flutter_lecture_clean_code/data/model/user/user.dart';
 
 class UsersDataSourceLocal {
-  Future<void> saveUsers(List<User> users) {}
+  Future<void> saveUsersCache(List<User> users) {}
 
-  Future<List<User>> loadUsers() {}
+  Future<List<User>> loadUsersCache() {}
+
+  Future<void> saveUsersDb(List<User> users) {}
+
+  Future<List<User>> loadUsersDb() {}
 }
 
 class UsersDataSourceRemote {

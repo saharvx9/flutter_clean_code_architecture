@@ -5,7 +5,6 @@ import 'package:flutter_lecture_clean_code/main.dart';
 import 'package:flutter_lecture_clean_code/pages/home/widgets/users_list_view.dart';
 import 'package:flutter_lecture_clean_code/utils/size_config.dart';
 import 'package:flutter_lecture_clean_code/widgets/custom_button.dart';
-
 import 'home_bloc.dart';
 import 'home_states_events.dart';
 

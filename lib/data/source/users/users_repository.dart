@@ -20,15 +20,33 @@ class UsersRepository {
   ///   Repository
   /// -----------------
   ///
-  Future<List<User>> loadUsers() {
-    return _local.loadUsers().then((localUsers) {
+  Future<List<User>> loadUsersCache() {
+    return _local.loadUsersCache().then((localUsers) {
       if (localUsers == null) {
         return _remote
             .getUsers()
-            .then((users) => _local.saveUsers(users))
-            .then((_) => _local.loadUsers());
+            .then((users) => _local.saveUsersCache(users))
+            .then((_) => _local.loadUsersCache());
       } else {
         return localUsers;
+      }
+    });
+  }
+
+  ///
+  /// LoadUsers from Floor - DB
+  /// same logic as [loadUsersCache] function
+  /// but instead saving on cache memory we are using CORE-DATA
+  ///
+  Future<List<User>> loadUsersDb() {
+    return _local.loadUsersDb().then((usersDb) {
+      if (usersDb == null || usersDb.isEmpty) {
+        return _remote
+            .getUsers()
+            .then((users) => _local.saveUsersDb(users))
+            .then((_) => _local.loadUsersDb());
+      } else {
+        return usersDb;
       }
     });
   }

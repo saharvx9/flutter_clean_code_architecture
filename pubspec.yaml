@@ -37,11 +37,15 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   # Bloc state management dependency
   flutter_bloc: ^6.0.6
+  # floor db
+  floor: ^0.18.0
 
 dev_dependencies:
   build_runner: ^1.10.6
+  floor_generator: ^0.18.0
   retrofit_generator: any
   json_serializable: ^3.5.0
+
 
   flutter_test:
     sdk: flutter

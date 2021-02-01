@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lecture_clean_code/application/getitmodules/data_binding_module.dart';
 import 'package:flutter_lecture_clean_code/pages/home/home_page.dart';
 import 'package:get_it/get_it.dart';
 
@@ -15,18 +16,22 @@ void main() {
   runApp(FutureBuilder(
     future: getIt.allReady(),
     builder: (context, snapshot) {
-      return MyApp();
+      final doneInitAll = snapshot.connectionState == ConnectionState.done && snapshot.hasData;
+      return doneInitAll ? MyApp() : Loader();
     }
   ));
 }
 
 registerGetItModules(){
   NetBindingModule.provideNetModules();
+  DataBindingModule.providesModules();
   RepositoryBindingModule.provideModules();
   BlocBindingModule.provideModules();
 }
 
 class MyApp extends StatelessWidget {
+
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -52,3 +57,19 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class Loader extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.white,
+      child: Center(
+        child: SizedBox(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
+}
+
+
+
