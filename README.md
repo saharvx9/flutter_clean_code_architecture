@@ -1,7 +1,9 @@
 # flutter_lecture_clean_code
 
+## UPDATE TO FLUTTER 2 + NULL SAFETY!!!
+
 Hi everyone,
-This code open for learning best practice for clean code architecture by isung this plugins:
+This code open for learning best practice for clean code architecture by using this plugins:
 
 ## flutter_bloc
 
