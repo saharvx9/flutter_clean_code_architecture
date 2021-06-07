@@ -8,7 +8,7 @@ part of 'users_api.dart';
 
 class _UsersApi implements UsersApi {
   _UsersApi(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://10.191.4.22:5000/api/';
+    baseUrl ??= 'http://10.0.0.27:5000/api/';
   }
 
   final Dio _dio;
