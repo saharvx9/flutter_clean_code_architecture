@@ -4,12 +4,13 @@ import 'package:flutter_lecture_clean_code/data/model/user/user.dart';
 import 'package:flutter_lecture_clean_code/utils/size_config.dart';
 
 import '../home_states_events.dart';
+import '../home_states_events.dart';
 
 class UsersListView extends StatelessWidget {
 
   final BaseHomeState state;
 
-  const UsersListView({Key key, this.state}) : super(key: key);
+  const UsersListView({Key? key,required this.state}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,8 @@ class UsersListView extends StatelessWidget {
         final users = (state as UsersListResult).users;
         return _usersListView(users);
       case ErrorState:
-        return _errorState();
+        final message = (state as ErrorState).message;
+        return _errorState(message);
       default: //will be InitialState
         return _firstTime();
     }
@@ -32,8 +34,8 @@ class UsersListView extends StatelessWidget {
     );
   }
 
-  Widget _errorState(){
-    return Text("Failed load users",style: TextStyle(color: Colors.red),);
+  Widget _errorState(String? message){
+    return Text(message??"Failed load users",style: TextStyle(color: Colors.red),);
   }
 
   Widget _circularProgress() {
@@ -58,9 +60,9 @@ class UsersListView extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(user.name),
+          Text("${user.name}"),
           Text(user.age.toString()),
-          Text(user.subject),
+          Text("${user.subject}"),
         ],
       ),
     );

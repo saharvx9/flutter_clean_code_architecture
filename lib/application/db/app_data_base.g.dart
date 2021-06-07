@@ -22,11 +22,11 @@ class $FloorAppDatabase {
 class _$AppDatabaseBuilder {
   _$AppDatabaseBuilder(this.name);
 
-  final String name;
+  final String? name;
 
   final List<Migration> _migrations = [];
 
-  Callback _callback;
+  Callback? _callback;
 
   /// Adds migrations to the builder.
   _$AppDatabaseBuilder addMigrations(List<Migration> migrations) {
@@ -43,7 +43,7 @@ class _$AppDatabaseBuilder {
   /// Creates the database and initializes it.
   Future<AppDatabase> build() async {
     final path = name != null
-        ? await sqfliteDatabaseFactory.getDatabasePath(name)
+        ? await sqfliteDatabaseFactory.getDatabasePath(name!)
         : ':memory:';
     final database = _$AppDatabase();
     database.database = await database.open(
@@ -56,18 +56,19 @@ class _$AppDatabaseBuilder {
 }
 
 class _$AppDatabase extends AppDatabase {
-  _$AppDatabase([StreamController<String> listener]) {
+  _$AppDatabase([StreamController<String>? listener]) {
     changeListener = listener ?? StreamController<String>.broadcast();
   }
 
-  UserDao _userDaoInstance;
+  UserDao? _userDaoInstance;
 
   Future<sqflite.Database> open(String path, List<Migration> migrations,
-      [Callback callback]) async {
+      [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
       version: 1,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
+        await callback?.onConfigure?.call(database);
       },
       onOpen: (database) async {
         await callback?.onOpen?.call(database);
@@ -80,7 +81,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `User` (`id` INTEGER, `name` TEXT, `age` INTEGER, `subject` TEXT, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `user` (`id` INTEGER NOT NULL, `name` TEXT, `age` INTEGER, `subject` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -99,8 +100,8 @@ class _$UserDao extends UserDao {
       : _queryAdapter = QueryAdapter(database, changeListener),
         _userInsertionAdapter = InsertionAdapter(
             database,
-            'User',
-            (User item) => <String, dynamic>{
+            'user',
+            (User item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
                   'age': item.age,
@@ -117,35 +118,35 @@ class _$UserDao extends UserDao {
   final InsertionAdapter<User> _userInsertionAdapter;
 
   @override
-  Future<List<User>> findAllUser() async {
-    return _queryAdapter.queryList('SELECT * FROM User',
-        mapper: (Map<String, dynamic> row) => User(
+  Future<List<User>?> findAllUser() async {
+    return _queryAdapter.queryList('SELECT * FROM user',
+        mapper: (Map<String, Object?> row) => User(
             row['id'] as int,
-            row['name'] as String,
-            row['age'] as int,
-            row['subject'] as String));
+            row['name'] as String?,
+            row['age'] as int?,
+            row['subject'] as String?));
   }
 
   @override
-  Stream<User> findUserById(int id) {
-    return _queryAdapter.queryStream('SELECT * FROM User WHERE id = ?',
-        arguments: <dynamic>[id],
-        queryableName: 'User',
-        isView: false,
-        mapper: (Map<String, dynamic> row) => User(
+  Stream<User?> findUserById(int id) {
+    return _queryAdapter.queryStream('SELECT * FROM user WHERE id = ?1',
+        mapper: (Map<String, Object?> row) => User(
             row['id'] as int,
-            row['name'] as String,
-            row['age'] as int,
-            row['subject'] as String));
+            row['name'] as String?,
+            row['age'] as int?,
+            row['subject'] as String?),
+        arguments: [id],
+        queryableName: 'user',
+        isView: false);
   }
 
   @override
   Future<void> insertUser(User user) async {
-    await _userInsertionAdapter.insert(user, OnConflictStrategy.abort);
+    await _userInsertionAdapter.insert(user, OnConflictStrategy.replace);
   }
 
   @override
   Future<void> insertUsers(List<User> users) async {
-    await _userInsertionAdapter.insertList(users, OnConflictStrategy.abort);
+    await _userInsertionAdapter.insertList(users, OnConflictStrategy.replace);
   }
 }

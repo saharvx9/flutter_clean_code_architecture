@@ -6,6 +6,10 @@ import 'package:flutter_lecture_clean_code/data/source/users/api/users_api.dart'
 
 class NetBindingModule {
 
+  static const CONNECT_TIMEOUT = 1000 * 10;
+  static const RECEIVE_TIMEOUT = 1000 * 10;
+  static const SEND_TIMEOUT = 1000 * 10;
+
   static provideNetModules(){
     _provideDio();
     _provideUsersApi();
@@ -15,6 +19,12 @@ class NetBindingModule {
     getIt.registerFactory(() {
       final dio = Dio();
       if(kDebugMode) dio.interceptors.add(PrettyDioLogger(requestBody: true ));
+
+      dio
+        ..options.connectTimeout = CONNECT_TIMEOUT
+        ..options.receiveTimeout = RECEIVE_TIMEOUT
+        ..options.sendTimeout = SEND_TIMEOUT;
+
       return dio;
     });
   }

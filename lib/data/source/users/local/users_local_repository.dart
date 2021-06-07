@@ -4,22 +4,22 @@ import 'package:flutter_lecture_clean_code/data/source/users/users_data_source.d
 
 class UsersLocalRepository implements UsersDataSourceLocal{
   final UserDao _userDao;
-  List<User> _userListCache;
+  List<User>? _userListCache;
 
   UsersLocalRepository(this._userDao);
 
   @override
-  Future<List<User>> loadUsersCache() async {
+  Future<List<User>?> loadUsersCache() async {
     return _userListCache;
   }
 
   @override
-  Future<void> saveUsersCache(List<User> users) {
+  Future<void> saveUsersCache(List<User>? users) {
     return Future(()=> _userListCache = users);
   }
 
   @override
-  Future<List<User>> loadUsersDb() {
+  Future<List<User>?> loadUsersDb() {
     return _userDao.findAllUser();
   }
 
@@ -27,7 +27,5 @@ class UsersLocalRepository implements UsersDataSourceLocal{
   Future<void> saveUsersDb(List<User> users) {
     return _userDao.insertUsers(users);
   }
-  
-  
 
 }
