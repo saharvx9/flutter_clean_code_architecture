@@ -9,6 +9,10 @@ This code open for learning best practice for clean code architecture by using t
 
 state managemnt packge
 
+Support with 2 types of bloc:
+1. Cubit
+2. Bloc - regualr
+
 https://pub.dev/packages/flutter_bloc
 
 ## get_it
