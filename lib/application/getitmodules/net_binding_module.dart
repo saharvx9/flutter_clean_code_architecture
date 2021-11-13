@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../../main.dart';
 import 'package:flutter_lecture_clean_code/data/source/users/api/users_api.dart';
 
+//Providers
 class NetBindingModule {
 
   static const CONNECT_TIMEOUT = 1000 * 10;

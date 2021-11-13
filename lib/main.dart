@@ -16,7 +16,7 @@ void main() {
   runApp(FutureBuilder(
     future: getIt.allReady(),
     builder: (context, snapshot) {
-      final doneInitAll = snapshot.connectionState == ConnectionState.done && snapshot.hasData;
+      final doneInitAll = snapshot.connectionState == ConnectionState.done;
       return doneInitAll ? MyApp() : Loader();
     }
   ));

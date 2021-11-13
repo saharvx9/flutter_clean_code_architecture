@@ -31,6 +31,7 @@ class HomeCubit extends Cubit<BaseHomeState> {
   final UsersRepository _usersRepository;
   HomeCubit(this._usersRepository) : super(InitialState());
 
+
   ///
   /// Clear list
   /// Emit empty list

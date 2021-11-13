@@ -6,6 +6,7 @@ import 'package:flutter_lecture_clean_code/data/source/users/users_data_source.d
 import 'package:flutter_lecture_clean_code/data/source/users/users_repository.dart';
 import 'package:flutter_lecture_clean_code/main.dart';
 
+//Providers
 class RepositoryBindingModule {
   static provideModules() {
     _provideUsersRepository();

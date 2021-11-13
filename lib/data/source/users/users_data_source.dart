@@ -11,6 +11,5 @@ abstract class UsersDataSourceLocal {
 }
 
 abstract class UsersDataSourceRemote {
-
   Future<List<User>> getUsers();
 }

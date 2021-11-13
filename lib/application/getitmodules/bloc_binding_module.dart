@@ -5,6 +5,7 @@ import '../../pages/home/home_bloc.dart';
 
 class BlocBindingModule {
 
+  //Providers
   static provideModules() {
     getIt.registerFactory(() => HomeBloc(getIt.get()));
     getIt.registerFactory(() => HomeCubit(getIt.get()));
