@@ -4,7 +4,7 @@ import 'package:flutter_lecture_clean_code/data/source/users/local/users_local_r
 import 'package:flutter_lecture_clean_code/data/source/users/remote/users_remote_repository.dart';
 import 'package:flutter_lecture_clean_code/data/source/users/users_data_source.dart';
 import 'package:flutter_lecture_clean_code/data/source/users/users_repository.dart';
-import 'package:flutter_lecture_clean_code/main.dart';
+import 'package:get_it/get_it.dart';
 
 //Providers
 class RepositoryBindingModule {
@@ -13,8 +13,8 @@ class RepositoryBindingModule {
   }
 
   static _provideUsersRepository() {
-    getIt.registerSingleton<UsersDataSourceRemote>(UsersRemoteRepository(getIt.get()));
-    getIt.registerSingletonWithDependencies<UsersDataSourceLocal>(()=>UsersLocalRepository(getIt.get()),dependsOn: [UserDao]);
-    getIt.registerSingletonWithDependencies(()=>UsersRepository(getIt.get(),getIt.get()),dependsOn: [UsersDataSourceLocal]);
+    GetIt.I.registerSingleton<UsersDataSourceRemote>(UsersRemoteRepository(GetIt.I.get()));
+    GetIt.I.registerSingletonWithDependencies<UsersDataSourceLocal>(()=>UsersLocalRepository(GetIt.I.get()),dependsOn: [UserDao]);
+    GetIt.I.registerSingletonWithDependencies(()=>UsersRepository(GetIt.I.get(),GetIt.I.get()),dependsOn: [UsersDataSourceLocal]);
   }
 }

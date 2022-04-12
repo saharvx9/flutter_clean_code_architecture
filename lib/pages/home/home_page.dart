@@ -5,6 +5,7 @@ import 'package:flutter_lecture_clean_code/main.dart';
 import 'package:flutter_lecture_clean_code/pages/home/widgets/users_list_view.dart';
 import 'package:flutter_lecture_clean_code/utils/size_config.dart';
 import 'package:flutter_lecture_clean_code/widgets/custom_button.dart';
+import 'package:get_it/get_it.dart';
 
 import 'home_bloc.dart';
 import 'home_states_events.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
             horizontal: SizeConfig.spacing_small_horizontal,
             vertical: SizeConfig.spacing_small_vertical),
         child: BlocProvider<HomeCubit>(
-          create: (context) => getIt.get<HomeCubit>(),
+          create: (context) => GetIt.I.get<HomeCubit>(),
           child: Column(
             children: [
               Row(
@@ -88,7 +89,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget _usersBlocHandler() {
     return BlocBuilder<HomeCubit, BaseHomeState>(
-        builder: (context, state) => UsersListView(state: state));
+        builder: (context, state) => UsersListView(state: state,onClickUser: (user){
+          print("show user: $user");
+          //Navigate user page if you want or display dialog...
+        }));
   }
 
 }

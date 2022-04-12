@@ -24,6 +24,11 @@ class User {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
+
+  @override
+  String toString() {
+    return 'User{id: $id, name: $name, age: $age, subject: $subject}';
+  }
 }
 
 // flutter pub run build_runner build

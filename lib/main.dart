@@ -8,13 +8,12 @@ import 'application/getitmodules/net_binding_module.dart';
 import 'application/getitmodules/repository_binding_module.dart';
 
 /// This is our global ServiceLocator/Dependency injection
-GetIt getIt = GetIt.instance;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   registerGetItModules();
   runApp(FutureBuilder(
-    future: getIt.allReady(),
+    future: GetIt.I.allReady(),
     builder: (context, snapshot) {
       final doneInitAll = snapshot.connectionState == ConnectionState.done;
       return doneInitAll ? MyApp() : Loader();

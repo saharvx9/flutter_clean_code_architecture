@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:flutter/foundation.dart';
-import '../../main.dart';
 import 'package:flutter_lecture_clean_code/data/source/users/api/users_api.dart';
 
 //Providers
@@ -17,7 +17,7 @@ class NetBindingModule {
   }
 
   static _provideDio(){
-    getIt.registerFactory(() {
+    GetIt.I.registerFactory(() {
       final dio = Dio();
       if(kDebugMode) dio.interceptors.add(PrettyDioLogger(requestBody: true ));
 
@@ -30,6 +30,6 @@ class NetBindingModule {
     });
   }
 
-  static void _provideUsersApi() => getIt.registerFactory(() => UsersApi(getIt.get()));
+  static void _provideUsersApi() => GetIt.I.registerFactory(() => UsersApi(GetIt.I.get()));
 
 }

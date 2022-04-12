@@ -1,5 +1,5 @@
 import 'package:flutter_lecture_clean_code/application/db/app_data_base.dart';
-import 'package:flutter_lecture_clean_code/main.dart';
+import 'package:get_it/get_it.dart';
 
 //Providers
 class DataBindingModule {
@@ -9,11 +9,11 @@ class DataBindingModule {
   }
   
   static _providesFloorDb(){
-    getIt.registerSingletonAsync(() => $FloorAppDatabase.databaseBuilder("app_database.db").build());
+    GetIt.I.registerSingletonAsync(() => $FloorAppDatabase.databaseBuilder("app_database.db").build());
   }
 
   static _providesUserDao(){
-    getIt.registerSingletonAsync(() => getIt.getAsync<AppDatabase>().then((db) => db.userDao),dependsOn: [AppDatabase]);
+    GetIt.I.registerSingletonAsync(() => GetIt.I.getAsync<AppDatabase>().then((db) => db.userDao),dependsOn: [AppDatabase]);
   }
 
 }
